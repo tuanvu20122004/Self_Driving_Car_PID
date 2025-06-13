@@ -82,7 +82,13 @@ def turnOfCar():
     #GPIO.cleanup()
     #dc_pwm.stop()
     #servo_pwm.stop()
-
+def read_from_arduino():
+    if ser.in_waiting > 0:
+        line = ser.readline().decode('utf-8').rstrip()
+        if line is not None and line !="":
+            line =float(line)
+        return line
+    return None
 def beInLane(Max_Sane_dist,distance,curvature , Mode , Tracked_class):
     global prev_Mode, car_speed
     if 'prev_Mode' not in globals():
